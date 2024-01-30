@@ -267,7 +267,25 @@ const descriptionsArray = [
         "",
         false
     ],
+
+    // Spell 34
+    [
+        "The caster may use the 'Command' spell using 2 words.",
+        "Instantaneous",
+        "Caster",
+        true
+    ],
 ];
+
+/*
+structure:
+    [
+        / Description (String)
+        / Duration (default="" or override String)
+        / Target (default="" or override String)
+        / isPositive (bool) - True = beneficial to the caster
+    ]
+*/
 
 // Set the target value
 const randomTarget = (targetOverride, isPositive) => {

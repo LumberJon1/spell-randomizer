@@ -19,7 +19,7 @@
   No installation necessary - see "Deployment"
 
   ## Deployment
-  !Link[]
+  https://lumberjon1.github.io/spell-randomizer/
 
   ## Usage
   Use this app to add some variety to any of your magic items, wild magic, or whatever else you would like to have interesting and unpredictable effects.  The randomized nature of the target and duration also adds some variety to otherwise-static spell targets or timelines.

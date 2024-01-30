@@ -7,13 +7,13 @@
     <title>Random Spell Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 w-screen">
 
-    <div class="w-full max-w-md flex flex-col justify-evenly items-center p-6 bg-white rounded-md shadow-md min-h-screen">
-        <h2 class="text-2xl font-bold w-full bg-emerald-400 py-3 text-center rounded">Random Spell</h2>
+    <div class="min-w-screen flex flex-col justify-evenly items-center p-6 bg-white rounded-md shadow-md min-h-screen">
+        <h2 class="text-2xl font-bold w-screen bg-emerald-400 py-3 text-center rounded">Random Spell</h2>
 
         <div id="spellInfo" class="flex flex-col justify-center items-center bg-stone-100 hidden p-2 w-3/4 shadow-md h-1/2 rounded text-center">
-            
+
             <div class="flex flex-col justify-center text-center">
                 <strong>Spell Info:</strong>
                 <div class="mt-2">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <button id="randomizeBtn" class="w-full bg-amber-500 font-bold py-2 px-4 rounded">
+        <button id="randomizeBtn" class="w-2/3 bg-amber-500 font-bold shadow-md py-2 px-4 rounded">
             Randomize
         </button>
     </div>
