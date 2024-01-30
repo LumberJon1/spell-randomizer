@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Random Spell Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="w-full max-w-md flex flex-col justify-evenly items-center p-6 bg-white rounded-md shadow-md min-h-screen">
+        <h2 class="text-2xl font-bold w-full bg-emerald-400 py-3 text-center rounded">Random Spell</h2>
+
+        <div id="spellInfo" class="flex flex-col justify-center items-center hidden p-4 my-4 w-3/4 shadow-md h-1/2 rounded text-center">
+            <div class="flex flex-col justify-center bg-stone-100 border-2 p-4 my-12 rounded text-center">
+                <strong>Spell Info:</strong>
+                <div class="mt-2">
+                    <strong>Target:</strong> <span id="target"></span>
+                </div>
+                <div class="my-4">
+                    <strong>Duration:</strong> <span id="duration"></span>
+                </div>
+                <div>
+                    <strong>Description:</strong> <span id="description"></span>
+                </div>
+            </div>
+        </div>
+
+        <button id="randomizeBtn" class="w-full bg-amber-500 font-bold py-2 px-4 rounded">
+            Randomize
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
