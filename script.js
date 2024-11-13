@@ -54,7 +54,7 @@ const descriptionsArray = [
     
     // Spell 7
     [
-        "The target is yeeted directly away from where the caster is facing, 30' into the air and 60' away, and must take 3D10 force damage.  If this causes the target to impact any objects they take an additional D10 for each, plus any fall damage.",
+        "The target is yeeted directly away from where the caster is facing, 30' into the air and 60' away, and must take 3D10 force damage.  If this causes the target to impact any objects they take an additional D10 for each, plus any fall damage.\n(Verbal component: 'YEET!')",
         "Instantaneous",
         "",
         false
@@ -222,9 +222,9 @@ const descriptionsArray = [
     
     // Spell 28
     [
-        "The caster forgets all known languages for the next 1D4 hours of in-game time, and can only speak and understand undercommon.  This applies to telepathic communication and writing.",
-        "1d4 hours",
-        "Caster",
+        "The target forgets all known languages for the next duration, and can only speak and understand undercommon.  This applies to telepathic communication and writing.",
+        "",
+        "",
         false
     ],
     
@@ -275,6 +275,134 @@ const descriptionsArray = [
         "Caster",
         true
     ],
+
+    // Spell 35
+    [
+        "The next magical attack or spell aimed at the target is reflected back toward the caster, who must make any applicable saves or suffer any applicable effects.",
+        "1 attack",
+        "",
+        true
+    ],
+
+    // Spell 36
+    [
+        "The next physical attackaimed at the target is reflected back toward the attacker, who must make any applicable saves or suffer any applicable damage.",
+        "1 attack",
+        "",
+        true
+    ],
+
+    // Spell 37
+    [
+        "The caster can choose any of their spells and cast it at their current max casting level + 1 without expending a spell slot.",
+        "1 action",
+        "Caster",
+        true
+    ],
+
+    // Spell 38
+    [
+        "Manual Breathing - target must maintain concentration for the duration or make a CON save DC 13 to avoid passing out.",
+        "",
+        "",
+        false
+    ],
+
+    // Spell 39
+    [
+        "Manual Heartbeat - target must maintain concentration for the duration or make a CON save DC 13 to avoid passing out.  If the duration continues while the target is unconscious, they must make death saves.  The effect wears off on 2 successes, regardless of duration.",
+        "",
+        "",
+        false
+    ],
+
+    // Spell 40
+    [
+        "Cringe - target suddenly remembers the most cringe thing they've done and must make a WIS save DC 16, or suffer 1d6 + caster level psychic damage.",
+        "Instantaneous",
+        "",
+        false
+    ],
+    
+    // Spell 41
+    [
+        "Inside Out Ray - target must make a DEX save DC spellcaster's ability or be hit by a ray that turns them inside out.  Target gets +1 to save for each level above 5th (or CR above 2), and each size above Small.  Being inside out deals 5d10 damage, and renders the target permanently stunned for the duration if they survive .",
+        "",
+        "Single enemy within 30' of caster",
+        true
+    ],
+
+    // Spell 42
+    [
+        "Lead Ray - target must make a DEX save DC spellcaster's ability or be hit by a ray that turns their arms into lead.  Target gets +1 to save for each level above 5th (or CR above 2), and each size above Small.  For duration, target is at disadvantage on attacks that involve its arms, and its movement is reduced by 10'",
+        "",
+        "Single enemy within 30' of caster",
+        true
+    ],
+
+    // Spell 43
+    [
+        "Backwards Head - target has its head turned 180 degrees around, is at disadvantage on attacks, and must make a DEX save DC 15 anytime it wants to move or else it moves in the opposite direction.",
+        "",
+        "",
+        false
+    ],
+
+    // Spell 44
+    [
+        "Caster channels divinity and calls down a flaming prison cage on a point of their choosing.  All creatures caught in the radius (including friendlies) are trapped for the duration, and take 1d6 radiant damage per turn.",
+        "",
+        "10' radius centered on point of caster's choosing within 60'",
+        true
+    ],
+
+    // Spell 45
+    [
+        "A rapidly spinning, 5-foot-diameter circular saw-like blade shoots from the caster's outstretched hands in a straight line, dealing 3d6 + caster's level slashing damage to any creature in its path unless they make a DEX save DC 14, stopping only when it hits a wall or other obstruction.",
+        "Instantaneous",
+        "straight line emanating from caster in a direction of their choosing",
+        true
+    ],
+
+    // Spell 46
+    [
+        "A rapidly spinning, 10-foot-diameter circular saw-like blade shoots from the caster's outstretched hands in a straight line, dealing 5d6 + caster's level slashing damage to any creature in its path unless they make a DEX save DC 14, stopping only when it hits a wall or other obstruction.",
+        "Instantaneous",
+        "straight line emanating from caster in a direction of their choosing",
+        true
+    ],
+
+    // Spell 47
+    [
+        "Target gains 4d6 temporary hit points.",
+        "",
+        "",
+        true
+    ],
+
+    // Spell 48
+    [
+        "Target gains the ability to see fractions of a second into the future, predicting attacks.  Their AC becomes 22 for the duration of the spell.",
+        "",
+        "",
+        true
+    ],
+
+    // Spell 49
+    [
+        "Target heals 2d8 + caster's level permanent hit points, up to their hit point maximum.",
+        "Instantaneous",
+        "",
+        true
+    ],
+
+    // Spell 50
+    [
+        "Target heals 4d10 + caster's level permanent hit points, up to their hit point maximum.",
+        "Instantaneous",
+        "",
+        true
+    ],
 ];
 
 /*
@@ -283,7 +411,7 @@ structure:
         / Description (String)
         / Duration (default="" or override String)
         / Target (default="" or override String)
-        / isPositive (bool) - True = beneficial to the caster
+        / isPositive (bool) - if applied to the caster, would this be beneficial? True = beneficial to the caster
     ]
 */
 
@@ -297,11 +425,11 @@ const randomTarget = (targetOverride, isPositive) => {
         let area = "Area: ";
 
         // Randomly assign the size of the area spell
-        const areaSizes = ["20' x 20' cube at point chosen by caster",
-            "10' x 10' cube centered around caster",
-            "30' cone emanating from caster",
-            "40' sphere centered around caster",
-            "40' sphere at point chosen by caster"
+        const areaSizes = ["20' radius centered on any point chosen by caster",
+            "10' radius centered around caster",
+            "15' cone emanating from caster in direction of their choosing",
+            "20' radius centered around caster",
+            "10' sphere at point chosen by caster"
         ];
 
         const randomArea = Math.floor(Math.random() * areaSizes.length);
@@ -323,13 +451,19 @@ const randomTarget = (targetOverride, isPositive) => {
         const targets = ["Self", "Single Friendly", "Multiple Friendlies", "Single Enemy", "Multiple Enemies"];
 
         // Assign weights based on the isPositive flag
-        const weights = isPositive ? [3, 2, 2, 1, 1] : [1, 1, 2, 2, 3];
+        const weights = isPositive ? [5, 4, 3, 1, 1] : [1, 1, 1, 7, 4];
 
+        // Logs for debugging...
+        console.log('isPositive:', isPositive)
+        console.log('weights:', weights)
+        
         // Calculate total weight
         const totalWeight = weights.reduce((acc, weight) => acc + weight, 0);
-
+        console.log('totals of the weights:', totalWeight)
+        
         // Generate a random number between 0 and totalWeight
         const randomWeight = Math.random() * totalWeight;
+        console.log('generated ', randomWeight)
 
         // Choose a target based on the random weight
         let chosenTarget;
